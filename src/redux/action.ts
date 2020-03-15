@@ -6,7 +6,7 @@ export const incrementAction = () => {
   };
 };
 
-export const decrement = () => {
+export const decrementAction = () => {
   return {
     type: ActionTypes.DECREMENT
   };
