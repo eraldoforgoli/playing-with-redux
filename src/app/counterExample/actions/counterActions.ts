@@ -11,6 +11,8 @@ export interface Decrement {
   type: CounterTypes.DECREMENT;
 }
 
+export type IncrementDecrementAction = Increment | Decrement;
+
 export const incrementAction = (): Increment => {
   return {
     type: CounterTypes.INCREMENT

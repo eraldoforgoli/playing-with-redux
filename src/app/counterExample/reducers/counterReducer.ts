@@ -1,6 +1,9 @@
-import { CounterTypes } from "../actions/index";
+import { CounterTypes, IncrementDecrementAction } from "../actions/index";
 
-export const incrementDecrementReducer = (state = 0, action: any) => {
+export const incrementDecrementReducer = (
+  state = 0,
+  action: IncrementDecrementAction
+) => {
   switch (action.type) {
     case CounterTypes.INCREMENT:
       return state + 1;
