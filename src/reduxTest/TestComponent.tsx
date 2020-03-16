@@ -25,7 +25,6 @@ const TestComponent: React.FC<TestProps> = ({
   const handleTextChange = (event: any) => {
     setInputMessage(event.target.value);
   };
-  debugger;
   return (
     <div>
       <h4>the counter is : {count}</h4>
