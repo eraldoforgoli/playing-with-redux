@@ -1,8 +1,8 @@
 import React, { useState, Dispatch } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../redux/action";
-import { Item, AppState } from "../types";
+import * as actions from "../actions/index";
+import { Item, AppState } from "../../../types";
 
 interface TestProps {
   count: number;
@@ -41,7 +41,10 @@ const TestComponent: React.FC<TestProps> = ({
         <input onChange={handleTextChange} value={inputMessage} type="text" />
         <button
           onClick={() => {
-            onAddItemClick(inputMessage);
+            if (inputMessage !== "") {
+              onAddItemClick(inputMessage);
+              setInputMessage("");
+            }
           }}
         >
           Save the item
@@ -64,7 +67,12 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<actions.AllActions>) => {
+export type AllActions =
+  | actions.Increment
+  | actions.Decrement
+  | actions.AddItem;
+
+const mapDispatchToProps = (dispatch: Dispatch<AllActions>) => {
   return {
     onIncrementClick: () => {
       dispatch(actions.incrementAction());

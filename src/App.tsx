@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./App.css";
-import TestComponent from "./reduxTest/TestComponent";
+import TestComponent from "./app/counterExample/components/Test";
 
 function App() {
   return (
