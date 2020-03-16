@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch } from "react";
 import { connect } from "react-redux";
 
-import store from "../redux/store";
-import { incrementAction, decrementAction, addItem } from "../redux/action";
-import { Item } from "../redux/reducer";
+import * as actions from "../redux/action";
+import { Item, AppState } from "../types";
 
 interface TestProps {
   count: number;
@@ -58,23 +57,23 @@ const TestComponent: React.FC<TestProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppState) => {
   return {
-    count: state.incrementDecrementReducer,
-    items: state.addItemReducer
+    count: state.count,
+    items: state.items
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<actions.AllActions>) => {
   return {
     onIncrementClick: () => {
-      dispatch(incrementAction());
+      dispatch(actions.incrementAction());
     },
     onDecrementClick: () => {
-      dispatch(incrementAction());
+      dispatch(actions.incrementAction());
     },
     onAddItemClick: (item: string) => {
-      dispatch(addItem(item));
+      dispatch(actions.addItem(item));
     }
   };
 };

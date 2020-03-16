@@ -6,20 +6,6 @@ interface action {
   description: string;
 }
 
-interface State {
-  count: number;
-  items: Item[];
-}
-
-export interface Item {
-  value: string;
-}
-
-const initialState: State = {
-  count: 0,
-  items: []
-};
-
 // The reducer is a pure function that takes the previous state and an action, and returns the next state.
 // Do not mutate the state
 
@@ -51,8 +37,8 @@ export const addItemReducer = (state = [], action: any) => {
 };
 
 const mainReducer = combineReducers({
-  incrementDecrementReducer,
-  addItemReducer
+  count: incrementDecrementReducer,
+  items: addItemReducer
 });
 
 export default mainReducer;
