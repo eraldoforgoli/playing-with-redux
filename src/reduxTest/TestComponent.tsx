@@ -3,23 +3,24 @@ import { connect } from "react-redux";
 
 import store from "../redux/store";
 import { incrementAction, decrementAction, addItem } from "../redux/action";
-import {
-  Item,
-  incrementDecrementReducer,
-  addItemReducer
-} from "../redux/reducer";
+import { Item } from "../redux/reducer";
 
 interface TestProps {
   count: number;
   items: Item[];
+  onIncrementClick: () => void;
+  onDecrementClick: () => void;
+  onAddItemClick: (item: string) => void;
 }
 
-const TestComponent: React.FC<TestProps> = ({ count, items }) => {
+const TestComponent: React.FC<TestProps> = ({
+  count,
+  items,
+  onIncrementClick,
+  onDecrementClick,
+  onAddItemClick
+}) => {
   const [inputMessage, setInputMessage] = useState<string>("");
-
-  const render = () => {};
-
-  store.subscribe(render);
 
   const handleTextChange = (event: any) => {
     setInputMessage(event.target.value);
@@ -30,26 +31,19 @@ const TestComponent: React.FC<TestProps> = ({ count, items }) => {
       <h4>the counter is : {count}</h4>
       <button
         onClick={() => {
-          store.dispatch(incrementAction());
+          onIncrementClick();
         }}
       >
         Increment
       </button>
 
-      <button
-        onClick={() => {
-          store.dispatch(decrementAction());
-        }}
-      >
-        Decrement
-      </button>
+      <button onClick={() => onDecrementClick()}>Decrement</button>
 
       <div>
         <input onChange={handleTextChange} value={inputMessage} type="text" />
         <button
           onClick={() => {
-            store.dispatch(addItem(inputMessage));
-            setInputMessage("");
+            onAddItemClick(inputMessage);
           }}
         >
           Save the item
@@ -72,4 +66,18 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(TestComponent);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onIncrementClick: () => {
+      dispatch(incrementAction());
+    },
+    onDecrementClick: () => {
+      dispatch(incrementAction());
+    },
+    onAddItemClick: (item: string) => {
+      dispatch(addItem(item));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestComponent);
