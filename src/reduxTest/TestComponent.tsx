@@ -1,26 +1,30 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import store from "../redux/store";
 import { incrementAction, decrementAction, addItem } from "../redux/action";
-import { Item } from "../redux/reducer";
-const TestComponent = () => {
-  const [count, setCount] = useState<number>(
-    store.getState().incrementDecrementReducer
-  );
-  const [inputMessage, setInputMessage] = useState<string>("");
-  const [items, setItems] = useState<Item[]>(store.getState().addItemReducer);
+import {
+  Item,
+  incrementDecrementReducer,
+  addItemReducer
+} from "../redux/reducer";
 
-  const render = () => {
-    const currentState = store.getState();
-    setCount(currentState.incrementDecrementReducer);
-    setItems(currentState.addItemReducer);
-  };
+interface TestProps {
+  count: number;
+  items: Item[];
+}
+
+const TestComponent: React.FC<TestProps> = ({ count, items }) => {
+  const [inputMessage, setInputMessage] = useState<string>("");
+
+  const render = () => {};
 
   store.subscribe(render);
 
   const handleTextChange = (event: any) => {
     setInputMessage(event.target.value);
   };
+  debugger;
   return (
     <div>
       <h4>the counter is : {count}</h4>
@@ -61,4 +65,11 @@ const TestComponent = () => {
   );
 };
 
-export default TestComponent;
+const mapStateToProps = (state: any) => {
+  return {
+    count: state.incrementDecrementReducer,
+    items: state.addItemReducer
+  };
+};
+
+export default connect(mapStateToProps)(TestComponent);

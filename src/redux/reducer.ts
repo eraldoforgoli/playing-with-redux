@@ -30,7 +30,7 @@ const initialState: State = {
 //   };
 // };
 
-const incrementDecrementReducer = (state = 0, action: any) => {
+export const incrementDecrementReducer = (state = 0, action: any) => {
   switch (action.type) {
     case ActionTypes.INCREMENT:
       return state + 1;
@@ -41,7 +41,7 @@ const incrementDecrementReducer = (state = 0, action: any) => {
   }
 };
 
-const addItemReducer = (state = [], action: any) => {
+export const addItemReducer = (state = [], action: any) => {
   switch (action.type) {
     case ActionTypes.ADD_ITEM:
       return [...state, action];
