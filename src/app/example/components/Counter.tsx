@@ -2,7 +2,8 @@ import React, { useState, Dispatch } from "react";
 import { connect } from "react-redux";
 
 import * as actions from "../actions/index";
-import { Item, AppState } from "../../../types";
+import { Item } from "../../../types";
+import { AppState } from "../../../store/index";
 
 interface TestProps {
   count: number;
